@@ -1,0 +1,39 @@
+<launch>
+
+  <!-- Kjorer transform for realsense camera -->
+  <include file="$(find raspberry_bot)/launch/tf_realsense.launch" />
+
+  <!-- Kjorer realsense camera -->
+  <include file="$(find raspberry_bot)/launch/rs_camera.launch" />
+
+  <!-- Kjorer pointcloud_filter -->
+  <include file="$(find raspberry_bot)/launch/pointcloud_filter.launch" />
+
+  <!-- Kjorer pointcloud_to_laserscan realsense -->
+  <include file="$(find raspberry_bot)/launch/pointcl2lasersc_realsense.launch" />
+
+  <!-- Kjorer errorCalculator -->
+  <node pkg="raspberry_bot" type="controller_errorCalculator_right.py" name="controller_errorCalculator" output="screen">
+  </node>
+
+  <!-- Kjorer controller_rowCentration service -->
+  <node pkg="raspberry_bot" type="service_controller_rowFollowing.py" name="controller_rowCentration" output="screen">
+  </node>
+
+  <!-- Kjorer obstacle_detection node -->
+  <node pkg="raspberry_bot" type="obstacle_detection.py" name="obstacle_detection">
+  </node>
+
+  <!-- Kjorer row_end_detection node -->
+  <node pkg="raspberry_bot" type="row_end_detection_right.py" name="row_end_detection">
+  </node>
+
+  <!-- Kjorer quaternions_to_euler node for odometry -->
+  <node pkg="raspberry_bot" type="quaternions_to_euler_odom.py" name="quaternions_to_euler_odom">
+  </node>
+
+  <!-- Kjorer controller_move service -->
+  <node pkg="raspberry_bot" type="service_controller_move.py" name="service_controller_move" output="screen">
+  </node>
+
+</launch>

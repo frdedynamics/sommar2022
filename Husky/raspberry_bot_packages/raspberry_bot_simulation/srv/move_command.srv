@@ -1,0 +1,5 @@
+# move_command node custom service message
+string Bevegelse # linear eller rotasjon
+float32 Input # grader i radianer eller antall meter roboten skal bevege seg
+---
+bool success # Tilbakemelding nar roboten er ferdig med bevegelsen
